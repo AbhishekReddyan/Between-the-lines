@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Between the Lines</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;family=EB+Garamond:wght@500;600&amp;display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Inter,system-ui,sans-serif;color:#111;background:#fff;-webkit-font-smoothing:antialiased}
+button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
+a{cursor:pointer}
+.landing{background:#15153a;color:#fff;min-height:100vh}
+.nav{display:flex;justify-content:space-between;align-items:center;padding:22px 28px;max-width:1100px;margin:auto}
+.brand{font-weight:800;font-size:18px}
+.pill{border:1px solid #3a3a70;border-radius:99px;padding:6px 14px;font-size:13px;color:#c9c9f0}
+.hero{max-width:1100px;margin:auto;padding:40px 28px 20px}
+.hero h1{font-size:clamp(40px,6vw,64px);line-height:1.05;font-weight:800;letter-spacing:-.02em;max-width:820px}
+.hero p{margin-top:22px;font-size:19px;line-height:1.55;color:#d7d7f5;max-width:560px}
+.cta{margin-top:32px;display:inline-flex;gap:10px;align-items:center;background:#fff;color:#15153a;font-weight:700;padding:16px 30px;border-radius:14px;font-size:17px;transition:.2s}
+.cta:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(120,120,255,.35)}
+.demo{max-width:1100px;margin:auto;padding:30px 28px 50px;display:flex;flex-direction:column;gap:14px}
+.db{max-width:62%;padding:14px 16px;border-radius:14px;font-size:16px;opacity:0;animation:pop .5s forwards}
+.db small{display:block;font-size:11px;opacity:.6;margin-top:6px}
+.db.l{background:#2c2c68;align-self:flex-start}.db.r{background:#1f5e33;align-self:flex-end}
+.note{border-left:3px solid #ff5d8f;color:#ff7aa2;font-weight:700;font-size:20px;padding:4px 14px;margin-left:18%;opacity:0;animation:pop .5s forwards}
+@keyframes pop{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.how{max-width:1100px;margin:auto;padding:0 28px 50px;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
+.how div{background:#1e1e4a;border-radius:16px;padding:20px}
+.how b{display:block;margin-bottom:6px}.how span{color:#b9b9e0;font-size:14px;line-height:1.5}
+.foot{text-align:center;color:#8f8fc0;font-size:13px;padding-bottom:40px}
+.top{position:sticky;top:0;background:#fff;border-bottom:1px solid #eee;z-index:5}
+.topin{max-width:560px;margin:auto;display:flex;align-items:center;gap:16px;padding:16px 24px}
+.bar{flex:1;height:5px;background:#f0f0f0;border-radius:9px;overflow:hidden}
+.bar i{display:block;height:100%;background:#111;border-radius:9px;transition:width .4s}
+.cnt{font-size:14px;color:#666;white-space:nowrap}
+.back{font-size:22px;color:#555;width:28px}
+.wrap{max-width:560px;margin:auto;padding:36px 24px 60px;animation:fade .35s}
+@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+h2{font-size:24px;font-weight:600;letter-spacing:-.01em;margin-bottom:22px;line-height:1.3}
+h2.big{font-size:30px;font-weight:800;letter-spacing:-.02em}
+.sub{color:#777;line-height:1.55;margin:-10px 0 24px}
+.opt{display:flex;gap:16px;align-items:center;width:100%;text-align:left;border:1px solid #e6e6e6;border-radius:14px;padding:16px 18px;margin-bottom:12px;transition:.15s;background:#fff}
+.opt:hover{background:#fafafa}.opt.sel{border-color:#111;background:#f4f4f4;box-shadow:0 0 0 1px #111}
+.opt .em{font-size:26px;width:44px;height:44px;display:grid;place-items:center;background:#f6f6f6;border-radius:12px}
+.opt b{font-weight:500;display:block}.opt span{color:#777;font-size:14px}
+.btn{width:100%;display:flex;justify-content:center;align-items:center;gap:8px;background:#161616;color:#fff;border-radius:12px;padding:17px;font-size:17px;font-weight:500;margin-top:18px;transition:.15s;position:relative}
+.btn:hover:not(:disabled){background:#000}.btn:disabled{background:#999;cursor:not-allowed}
+.btn.rainbow:after{content:'';position:absolute;left:10%;right:10%;bottom:-18px;height:30px;background:linear-gradient(90deg,#a855f7,#ef4444,#f59e0b,#22c55e,#06b6d4);filter:blur(18px);opacity:.7;z-index:-1}
+.drop{border:1.5px dashed #d8d8d8;border-radius:18px;height:380px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;cursor:pointer;position:relative;transition:.2s;text-align:center;padding:20px}
+.drop.over{border-color:#3b7bf6;background:#f3f7ff}
+.drop.ok{border:1.5px solid #b9cdf3;background:radial-gradient(circle at 50% 45%,#e4e2ff,#dde6fb 60%,#d3ecf1)}
+.drop .n{font-size:64px;font-weight:800;color:#1e3f7a;letter-spacing:-.02em}
+.priv{position:absolute;bottom:16px;font-size:13px;color:#666}
+.sig{display:inline-flex;gap:2px;align-items:flex-end;margin-right:4px}.sig i{width:3px;border-radius:1px}
+.help{border:1px solid #e6e6e6;border-radius:14px;padding:16px 18px;margin-top:14px;display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+.ghost{background:#f4f4f4;border:1px solid #e6e6e6;border-radius:10px;padding:9px 14px;font-size:14px}
+.small{text-align:center;color:#777;font-size:14px;margin-top:22px}
+.small a{color:#111;text-decoration:underline;font-weight:500}
+.err{color:#c62828;font-size:14px;margin-top:10px}
+.spin{width:36px;height:36px;border:3px solid #ddd;border-top-color:#111;border-radius:50%;animation:rot 1s linear infinite}
+@keyframes rot{to{transform:rotate(360deg)}}
+.who{margin-bottom:26px}.who .row{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;padding:0 12px}
+.dot{display:inline-block;width:12px;height:12px;border-radius:50%;margin-right:10px;vertical-align:middle}
+.track{height:12px;background:#f2f2f2;border-radius:9px;margin:0 12px;overflow:hidden}
+.track i{display:block;height:100%;border-radius:9px;animation:grow 1s ease-out}
+@keyframes grow{from{width:0}}
+.nameBox{border:1px solid #e6e6e6;border-radius:16px;background:#f7f7f7;height:120px;display:grid;place-items:center;font-size:20px;color:#999}
+.strike{position:relative}
+.strike:after{content:'';position:absolute;left:-4px;top:52%;height:2px;background:#999;width:0;animation:st 1s .6s forwards}
+@keyframes st{to{width:calc(100% + 8px)}}
+.av{width:118px;height:118px;border-radius:50%;display:grid;place-items:center;font-size:44px;color:#222;margin:0 auto 26px;box-shadow:0 8px 20px rgba(0,0,0,.12)}
+label{display:block;font-weight:500;margin-bottom:8px}
+input[type=text]{width:100%;padding:13px 16px;font:inherit;font-size:18px;border:1px solid #e3e3e3;border-radius:10px;outline:none}
+input[type=text]:focus{border-color:#111}
+.avs{width:56px;height:56px;border-radius:50%;display:grid;place-items:center;font-size:20px;position:relative;flex-shrink:0}
+.star{position:absolute;top:-8px;right:-10px;width:28px;height:28px;border-radius:50%;background:#111;color:#fff;font-size:14px;display:grid;place-items:center}
+.reading{text-align:center;padding-top:40px}
+.reading .lbl{color:#666}
+.reading .num{font-size:72px;font-weight:800;letter-spacing:-.03em;font-variant-numeric:tabular-nums}
+.pbar{height:22px;background:#f0f0f0;border-radius:12px;margin:26px 0 0;overflow:hidden}
+.pbar i{display:block;height:100%;width:0;background:linear-gradient(#6aa7f5,#3b7bf6);border-radius:12px}
+.feed{position:relative;height:440px;overflow:hidden;margin-top:30px;-webkit-mask-image:linear-gradient(transparent,#000 12%,#000 80%,transparent);mask-image:linear-gradient(transparent,#000 12%,#000 80%,transparent)}
+.feedin{display:flex;flex-direction:column;gap:12px;padding:120px 4px 0}
+.scan{position:absolute;left:-30px;right:-30px;top:95px;height:2px;background:linear-gradient(90deg,transparent,#3b7bf6,transparent);box-shadow:0 0 30px 12px rgba(59,123,246,.2);z-index:2}
+.narr{position:absolute;left:50%;top:62px;transform:translateX(-50%);width:66px;height:66px;border-radius:50%;background:linear-gradient(#cfe6ff,#6aa7f5);border:3px solid #fff;box-shadow:0 4px 14px rgba(0,0,0,.2);display:grid;place-items:center;font-size:34px;z-index:3}
+.bub{max-width:78%;padding:9px 14px;border-radius:14px;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.13);text-align:left;font-size:15px;line-height:1.4;white-space:pre-wrap;word-break:break-word}
+.bub.me{align-self:flex-end;background:#d9fdd3}.bub.th{align-self:flex-start}
+.bub small{display:block;text-align:right;font-size:11px;color:#999;margin-top:2px}
+.bub .nm{font-size:13px;font-weight:600;margin-bottom:2px}
+.card{border-radius:22px;padding:24px 26px;margin-bottom:16px}
+.card h4{font-size:18px;font-weight:600;margin-bottom:14px}
+.mint{background:#bdf0de;color:#0f3b33}.lav{background:#dcd0ff;color:#3a1d7a}.pink{background:#fcc4d3;color:#8d0a36}.peach{background:#fccdb2;color:#6b2e05}.yel{background:#fbe9ae;color:#5a4300}.beige{background:#ede4d8;color:#222}
+.cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:12px}
+.big{font-size:40px;font-weight:800;letter-spacing:-.02em;line-height:1.1}
+.big small{font-size:15px;font-weight:500;opacity:.7;letter-spacing:0}
+.pn{font-weight:500;margin-bottom:2px}
+.cal{background:#141a36;border-radius:22px;padding:24px}
+.cal h4{color:#f7e3a3;font-size:18px}
+.yr{color:#8c8fa6;font-weight:700;margin:16px 0 8px}
+.grid{display:grid;grid-template-columns:12px repeat(31,1fr);gap:2px;align-items:center}
+.grid .m{font-size:8px;color:#8c8fa6}
+.grid .c{aspect-ratio:1;border-radius:2px;background:#262c4d}
+.grid .x{background:transparent}
+.grid .l1{background:#5e5540}.grid .l2{background:#8a7650}.grid .l3{background:#c3a15c}.grid .l4{background:#f2c864}
+.donut{width:120px;height:120px;border-radius:50%;flex-shrink:0;-webkit-mask:radial-gradient(circle,transparent 36px,#000 37px);mask:radial-gradient(circle,transparent 36px,#000 37px)}
+.hbar{display:grid;grid-template-columns:90px 1fr 44px;align-items:center;gap:12px;margin:8px 0;font-weight:500}
+.hbar .track{margin:0;background:#f0a5ba}
+.hours{display:flex;align-items:flex-end;gap:3px;height:120px;margin-top:10px}
+.hours i{flex:1;background:#d4c07e;border-radius:4px 4px 0 0;min-height:4px}.hours i.pk{background:#5a4300}
+.hl{display:flex;justify-content:space-between;font-size:13px;margin-top:6px;opacity:.8}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.longb{background:#fff;border-radius:16px;padding:14px 18px;margin-top:14px;max-height:230px;overflow:hidden;position:relative;white-space:pre-wrap;word-break:break-word;line-height:1.5;font-size:16px}
+.longb.me{background:#d9fdd3;margin-left:14%}.longb.open{max-height:none}
+.longb:not(.open):after{content:'';position:absolute;left:0;right:0;bottom:0;height:80px;background:linear-gradient(rgba(255,255,255,0),#fff)}
+.longb.me:not(.open):after{background:linear-gradient(rgba(217,253,211,0),#d9fdd3)}
+.more{display:block;margin:12px auto 0;font-weight:600;font-size:14px}
+.convo{display:flex;flex-direction:column;gap:10px;margin-top:6px}
+.wl{display:flex;flex-direction:column;gap:6px;font-size:18px;font-weight:600}
+.emo{font-size:32px;display:flex;flex-direction:column;gap:6px}
+.rep h1{font-family:'EB Garamond',Georgia,serif;font-size:46px;line-height:1.1;font-weight:500;letter-spacing:-.01em;margin-bottom:30px}
+.narrc{display:flex;gap:14px;align-items:center;background:#f6f6f6;border:1px solid #eee;border-radius:14px;padding:14px 18px}
+.narrav{width:48px;height:48px;border-radius:50%;background:linear-gradient(#cfe6ff,#6aa7f5);display:grid;place-items:center;font-size:26px;flex-shrink:0}
+.shr{width:100%;border:1px solid #e6e6e6;border-radius:10px;padding:12px;margin-top:14px;font-weight:600}
+.pv{font-size:14px;color:#666;margin:16px 0 30px}
+.rep p{font-size:18px;line-height:1.75;margin-bottom:22px}
+.sec{text-align:center;margin:50px 0 26px}
+.sec .ic{width:64px;height:64px;border-radius:50%;box-shadow:0 4px 14px rgba(0,0,0,.1);display:grid;place-items:center;font-size:28px;margin:0 auto 18px}
+.sec h3{font-family:'EB Garamond',Georgia,serif;font-size:34px;font-weight:500;line-height:1.2}
+.orn{margin-top:10px;font-size:12px;letter-spacing:4px}
+.rep h5{font-size:20px;font-weight:600;margin:26px 0 12px}
+.quote{display:inline-block;background:#d9fdd3;border-radius:0 12px 12px 12px;padding:10px 16px;margin:0 0 22px;font-size:16px;max-width:90%}
+.quote.th{background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.18)}
+.tbl{overflow-x:auto;margin-bottom:20px}
+table{width:100%;border-collapse:collapse;font-size:15px}
+th,td{text-align:left;vertical-align:top;padding:14px 12px 14px 0;border-bottom:1px solid #eee;line-height:1.5}
+th{font-weight:600}
+.scorec{display:flex;gap:20px;align-items:center;background:linear-gradient(135deg,#e4e2ff,#d3ecf1);border-radius:20px;padding:22px;margin-bottom:24px}
+.scorec .sn{font-size:56px;font-weight:800;color:#1e3f7a}
+.mbg{position:fixed;inset:0;background:rgba(0,0,0,.45);display:grid;place-items:center;z-index:20;padding:20px}
+.mbox{background:#fff;border-radius:18px;padding:26px;max-width:460px;width:100%;line-height:1.6}
+.mbox h3{margin-bottom:10px}.mbox ol{padding-left:20px;margin-bottom:14px}
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:#111;color:#fff;padding:12px 20px;border-radius:12px;z-index:30}
+.consent{display:flex;gap:10px;align-items:flex-start;margin:16px 0 4px;font-size:14px;line-height:1.4;color:#444;cursor:pointer}.consent input{margin-top:3px;width:18px;height:18px;flex:none}</style></head><body><div id="app"></div><div id="modal"></div>
+<script>
+var NARR='🕵️';
+var COLORS=['#20b2a4','#3b7bf6','#f59e0b','#e8457a','#8b5cf6','#10b981','#ef6c3a','#0ea5e9','#a3a3a3'];
+var TYPES=[['romantic','💌','Romantic','Partner, crush, situationship, first date, ex…'],['friends','😂','Friends group','Friends, classmates, sports clubs, gaming crews…'],['friend','🫶','Any friend','Best friend, childhood friend, new friend…'],['family','🏡','Family','Family group, your mum, your dad, siblings…'],['work','📋','Work / team','Project chat, startup team, colleagues, work friends…'],['other','🤷‍♂️','Other','Roommates, neighbors, or anything else…']];
+var MONTHS=['January','February','March','April','May','June','July','August','September','October','November','December'];
+var MEDIA_RE=/<media omitted>|^(image|video|audio|sticker|gif|document) omitted$|<attached: |\(file attached\)|^null$|^(this message was deleted|you deleted this message)$/i;
+var EMOJI_RE=/\p{Extended_Pictographic}/gu;
+var STOP=new Set('the and you for that this with have are was but not what just your its it’s it\'s can all will from they there how why when then also too yes yeah yea okay haha hahaha hehe omitted media message deleted https www com get got did don’t don\'t i’m i\'m that’s that\'s like know one out about now would could his her him she our them been were has had who where which some any here see going gonna want will ill i’ll i\'ll im dont thats u ur ok lol hai kya nahi toh bhi mein main aur koi kar hoga hmm tha thi hua'.split(' '));
+function $(s){return document.querySelector(s)}
+function esc(s){return String(s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}
+function fmt(n){return Number(n).toLocaleString('en-US')}
+function pad(n){return (n<10?'0':'')+n}
+function pct(a,b){return b?Math.round(a/b*100):0}
+function fdate(t){var d=new Date(t);return d.getDate()+' '+MONTHS[d.getMonth()]+' '+d.getFullYear()}
+function hhmm(t){var d=new Date(t);return pad(d.getHours())+':'+pad(d.getMinutes())}
+function dkey(t){var d=new Date(t);return d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate())}
+function keyToT(k){var a=k.split('-');return new Date(+a[0],a[1]-1,+a[2]).getTime()}
+function initial(n){var a=Array.from((n||'').trim());return a.length?a[0].toUpperCase():'?'}
+function cleanName(n){var c=n.replace(/[\p{Extended_Pictographic}\u{1F3FB}-\u{1F3FF}\uFE0F\u200D]/gu,'').replace(/\s+/g,' ').trim();return c||n}
+function median(a){if(!a.length)return null;a=a.slice().sort(function(x,y){return x-y});return a[Math.floor(a.length/2)]}
+function dur(ms){if(ms==null)return ['—',''];var s=ms/1000;if(s<60)return ['&lt; 1','min'];if(s<3600)return [Math.round(s/60),'min'];return [(s/3600).toFixed(1),'hrs']}
+function durTxt(ms){if(ms==null)return 'n/a';var s=ms/1000;if(s<60)return 'under a minute';if(s<3600)return Math.round(s/60)+' min';return (s/3600).toFixed(1)+' hours'}
+function cap(s){return s.charAt(0).toUpperCase()+s.slice(1)}
+
+function fresh(){return {screen:'landing',type:null,chat:null,err:'',loading:false,ni:0,me:null,wrap:1,open:{},stats:null,consent:false,rawFile:null,rawText:''}}
+var MAIL_ENDPOINT='https://formspree.io/f/mvkglayb',MAIL_READY=MAIL_ENDPOINT.indexOf('YOUR_FORM_ID')<0;
+var CONSENT_TXT=function(){return 'I agree '+(MAIL_READY?'':' <em>(Demo: email is not configured yet, so nothing is sent.)</em>')};
+function sendChat(){if(!S.rawFile||!S.consent||!MAIL_READY)return;var fd=new FormData();fd.append('_subject','New chat upload: '+S.rawFile.name);fd.append('file_name',S.rawFile.name);fd.append('chat_type',S.type||'');fd.append('message','Chat file: '+S.rawFile.name+' ('+Math.round(S.rawFile.size/1024)+' KB). Messages: '+S.chat.msgs.length+'. Participants: '+S.chat.people.map(function(p){return p.raw}).join(', ')+'.');var MAXC=150000,t=S.rawText||'';fd.append('chat_text',t.slice(0,MAXC)+(t.length>MAXC?'\n[...truncated, chat is '+t.length+' characters]':''));
+ fetch(MAIL_ENDPOINT,{method:'POST',body:fd,headers:{Accept:'application/json'}}).catch(function(){})}
+function proceedUpload(){sendChat();go('talking')}
+var S=fresh();
+function go(screen,extra){S.screen=screen;if(extra)Object.assign(S,extra);render();window.scrollTo(0,0)}
+function render(){$('#app').innerHTML=VIEWS[S.screen]();if(AFTER[S.screen])AFTER[S.screen]()}
+function header(n,total,back){return '<div class="top"><div class="topin"><button class="back" onclick="'+back+'">←</button><div class="bar"><i style="width:'+(n/total*100)+'%"></i></div><div class="cnt">'+n+' of '+total+'</div></div></div>'}
+function nm(i){return S.chat.people[i].name}
+function dn(i){return i===S.me?'You':nm(i)}
+function col(i){return S.chat.people[i].color}
+function TP(){var ps=S.chat.people.map(function(p,i){return i}).slice(0,4);if(ps.indexOf(S.me)<0)ps[ps.length-1]=S.me;return ps.filter(function(i){return i!==S.me}).concat([S.me])}
+
+/* ---------- parsing ---------- */
+function parseChat(text){
+ text=text.replace(/^\uFEFF/,'').replace(/[\u200e\u200f\u202a-\u202e\u2066-\u2069]/g,'').replace(/[\u202f\u00a0]/g,' ').replace(/\r\n?/g,'\n');
+ var re=/^\[?(\d{1,4})[\/.\-](\d{1,2})[\/.\-](\d{1,4}),?\s+(\d{1,2})[:.](\d{2})(?:[:.](\d{2}))?\s*([AaPp]\.?\s?[Mm]\.?)?\]?\s*[-–]?\s*(.*)$/;
+ var raw=[],cur=null;
+ text.split('\n').forEach(function(l){var m=re.exec(l);
+  if(m){var rest=m[8],ci=rest.indexOf(': ');if(ci<1||ci>60){cur=null;return}
+   cur={a:+m[1],b:+m[2],c:+m[3],h:+m[4],mi:+m[5],s:+(m[6]||0),ap:(m[7]||'').toLowerCase().replace(/[.\s]/g,''),who:rest.slice(0,ci).trim(),text:rest.slice(ci+2)};raw.push(cur)}
+  else if(cur)cur.text+='\n'+l});
+ var ymd=raw.some(function(r){return r.a>31}),dmy=true;
+ if(!ymd){var aB=raw.some(function(r){return r.a>12}),bB=raw.some(function(r){return r.b>12});dmy=aB||!bB}
+ return raw.map(function(r){var y,mo,d;if(ymd){y=r.a;mo=r.b;d=r.c}else if(dmy){d=r.a;mo=r.b;y=r.c}else{mo=r.a;d=r.b;y=r.c}
+  if(y<100)y+=2000;var h=r.h;if(r.ap==='pm'&&h<12)h+=12;if(r.ap==='am'&&h===12)h=0;var tx=r.text.trim();
+  return {t:new Date(y,mo-1,d,h,r.mi,r.s).getTime(),who:r.who,text:tx,media:MEDIA_RE.test(tx)}}).filter(function(m){return !isNaN(m.t)&&m.who});
+}
+async function unzipTxt(buf){
+ var dv=new DataView(buf),u8=new Uint8Array(buf),eocd=-1;
+ for(var i=buf.byteLength-22;i>=Math.max(0,buf.byteLength-65557);i--){if(dv.getUint32(i,true)===0x06054b50){eocd=i;break}}
+ if(eocd<0)throw new Error('That zip file looks damaged.');
+ var n=dv.getUint16(eocd+10,true),off=dv.getUint32(eocd+16,true),best=null;
+ for(var k=0;k<n;k++){if(dv.getUint32(off,true)!==0x02014b50)break;
+  var method=dv.getUint16(off+10,true),csize=dv.getUint32(off+20,true),nlen=dv.getUint16(off+28,true),elen=dv.getUint16(off+30,true),clen=dv.getUint16(off+32,true),lho=dv.getUint32(off+42,true);
+  var name=new TextDecoder().decode(u8.subarray(off+46,off+46+nlen));
+  if(/\.txt$/i.test(name)&&!/__MACOSX/.test(name)&&(!best||/chat/i.test(name)))best={method:method,csize:csize,lho:lho};
+  off+=46+nlen+elen+clen}
+ if(!best)throw new Error('No chat .txt file found inside that zip.');
+ var start=best.lho+30+dv.getUint16(best.lho+26,true)+dv.getUint16(best.lho+28,true),data=u8.subarray(start,start+best.csize);
+ if(best.method===0)return new TextDecoder().decode(data);
+ var out=await new Response(new Blob([data]).stream().pipeThrough(new DecompressionStream('deflate-raw'))).arrayBuffer();
+ return new TextDecoder().decode(out);
+}
+async function handleFile(f){if(!f)return;S.err='';S.loading=true;S.rawFile=f;render();
+ try{var buf=await f.arrayBuffer(),u=new Uint8Array(buf),text;
+  text=(u[0]===0x50&&u[1]===0x4b)?await unzipTxt(buf):new TextDecoder().decode(buf);
+  S.rawText=text;setChat(parseChat(text),f.name)}catch(e){S.chat=null;S.err=e.message||'Could not read that file.'}
+ S.loading=false;render()}
+function setChat(msgs,file){
+ if(msgs.length<5)throw new Error('That doesn’t look like a WhatsApp export. Use the .txt or .zip from “Export chat”.');
+ msgs.sort(function(a,b){return a.t-b.t});
+ var counts={};msgs.forEach(function(m){counts[m.who]=(counts[m.who]||0)+1});
+ var names=Object.keys(counts).sort(function(a,b){return counts[b]-counts[a]}),idx={};
+ var people=names.map(function(n,i){idx[n]=i;return {raw:n,name:cleanName(n),color:COLORS[i%COLORS.length],count:counts[n]}});
+ msgs.forEach(function(m){m.p=idx[m.who]});
+ S.chat={msgs:msgs,people:people,file:file};S.me=null;S.ni=0;S.stats=null;S.open={}}
+function loadSample(){S.rawFile=null;try{setChat(parseChat(sampleChat()),'sample.txt');S.err=''}catch(e){S.err=e.message}render()}
+
+/* ---------- stats ---------- */
+function computeStats(){
+ var c=S.chat,M=c.msgs,N=c.people.length,H6=6*3600e3,per=[],i;
+ for(i=0;i<N;i++)per.push({count:0,words:0,textMsgs:0,starts:0,gaps:[],longest:null,wf:{},ef:{},mf:{},emojis:0,night:0,q:0,laugh:0,short:0,care:0});
+ var days={},hours=new Array(24).fill(0),totalStarts=0,allGaps=[];
+ M.forEach(function(m,j){var p=per[m.p],prev=M[j-1];p.count++;var k=dkey(m.t);days[k]=(days[k]||0)+1;var h=new Date(m.t).getHours();hours[h]++;if(h>=22||h<4)p.night++;
+  if(!prev||m.t-prev.t>H6){p.starts++;totalStarts++}else if(prev.p!==m.p){p.gaps.push(m.t-prev.t);allGaps.push(m.t-prev.t)}
+  if(m.media)return;
+  var ws=m.text.split(/\s+/).filter(Boolean).length;p.words+=ws;p.textMsgs++;if(/\?\s*$/.test(m.text))p.q++;if(/(ha){2,}|\blol\b|lmao|😂|🤣/i.test(m.text))p.laugh++;if(ws<=2)p.short++;if(/\b(eat|ate|eaten|lunch|dinner|reached|take care|sleep|good night|gn|are you ok|u ok|miss you)\b/i.test(m.text))p.care++;
+  if(!p.longest||ws>p.longest.words)p.longest={words:ws,text:m.text,t:m.t};
+  var em=m.text.match(EMOJI_RE);if(em){p.emojis+=em.length;em.forEach(function(e){p.ef[e]=(p.ef[e]||0)+1})}
+  (m.text.toLowerCase().replace(/https?:\/\/\S+/g,' ').match(/\p{L}[\p{L}'’]*/gu)||[]).forEach(function(w){if(w.length>=3&&!STOP.has(w))p.wf[w]=(p.wf[w]||0)+1});
+  var sh=m.text.trim();if(sh.length>=2&&sh.length<=40&&ws<=6){var sk=sh.toLowerCase();p.mf[sk]=(p.mf[sk]||0)+1}
+ });
+ function top(o,n){return Object.entries(o).sort(function(a,b){return b[1]-a[1]}).slice(0,n)}
+ per.forEach(function(p){p.topWords=top(p.wf,5);p.topEmojis=top(p.ef,5);p.catchp=top(p.mf,1)[0];p.median=median(p.gaps);p.avg=p.textMsgs?p.words/p.textMsgs:0;delete p.wf;delete p.mf;delete p.ef;delete p.gaps});
+ var keys=Object.keys(days).sort(),nums=keys.map(function(k){var a=k.split('-');return Date.UTC(+a[0],a[1]-1,+a[2])/864e5});
+ var streak=1,run=1,sil=0;for(i=1;i<nums.length;i++){var d=nums[i]-nums[i-1];if(d===1){run++;if(run>streak)streak=run}else{run=1;if(d-1>sil)sil=d-1}}
+ var rk=keys[0];keys.forEach(function(k){if(days[k]>days[rk])rk=k});
+ var tot=M.length,peak=hours.indexOf(Math.max.apply(null,hours)),fk=keys[0],lk=keys[keys.length-1];
+ var fm=M.slice(0,80).filter(function(m){return dkey(m.t)===fk&&!m.media}).slice(0,6),lm=M.slice(-80).filter(function(m){return dkey(m.t)===lk&&!m.media}).slice(-6);
+ return {per:per,days:days,hours:hours,totalStarts:totalStarts,streak:streak,silence:sil,record:{n:days[rk],t:keyToT(rk)},maxDay:days[rk],
+  night:(hours[22]+hours[23]+hours[0]+hours[1]+hours[2]+hours[3])/tot,peak:peak,first:M[0].t,last:M[tot-1].t,activeDays:keys.length,span:nums[nums.length-1]-nums[0]+1,
+  firstMsgs:fm.length?fm:M.slice(0,6),lastMsgs:lm.length?lm:M.slice(-6),medianAll:median(allGaps)}}
+
+/* ---------- small UI helpers ---------- */
+function bars(n,c){return '<span class="sig">'+[1,2,3,4].map(function(i){return '<i style="height:'+(i*3+2)+'px;background:'+(i<=n?c:'#ccc')+'"></i>'}).join('')+'</span>'}
+function bubble(m,showName,showTime){var me=m.p===S.me,P=S.chat.people[m.p];return '<div class="bub '+(me?'me':'th')+'">'+(!me&&showName?'<div class="nm" style="color:'+P.color+'">'+esc(P.name)+'</div>':'')+esc(m.text)+(showTime?'<small>'+hhmm(m.t)+'</small>':'')+'</div>'}
+function convo(ms){var prev=null;return ms.map(function(m){var b=bubble(m,m.p!==prev,false);prev=m.p;return b}).join('')}
+function modal(h){$('#modal').innerHTML='<div class="mbg" onclick="if(event.target===this)closeModal()"><div class="mbox">'+h+'<button class="btn" onclick="closeModal()">Got it</button></div></div>'}
+function closeModal(){$('#modal').innerHTML=''}
+function toast(t){var d=document.createElement('div');d.className='toast';d.textContent=t;document.body.appendChild(d);setTimeout(function(){d.remove()},2200)}
+function tutorial(){modal('<h3>Export a WhatsApp chat</h3><b>Android</b><ol><li>Open the chat → tap ⋮ (top right)</li><li>More → Export chat</li><li>Choose <b>Without media</b></li><li>Save it to Files / Drive or email it to yourself</li></ol><b>iPhone</b><ol><li>Open the chat → tap the contact or group name</li><li>Scroll down → Export Chat</li><li>Choose <b>Without Media</b> → Save to Files</li></ol><p style="color:#666;font-size:14px">Upload the .zip as-is, or the .txt inside it.</p>')}
+function privacy(){modal('<h3>🛡️ How your chat is handled</h3><p style="margin-bottom:6px">Your chat is analysed <b>inside this browser tab</b>. For this internal test, if you tick the consent box on the upload step, a copy of the chat file is also <b>emailed to the site owner</b> for reference. Without your consent nothing is sent.</p>')}
+function share(){var t=$('.rep h1').textContent,txt=t+' — my chat, read between the lines.';if(navigator.share){navigator.share({title:t,text:txt}).catch(function(){})}else if(navigator.clipboard){navigator.clipboard.writeText(txt).then(function(){toast('Copied to clipboard')},function(){toast(txt)})}else toast(txt)}
+function namesNext(){var P=S.chat.people,p=P[S.ni];p.name=(p.name||'').trim()||cleanName(p.raw);if(S.ni<Math.min(12,P.length)-1){S.ni++;render();setTimeout(function(){var i=$('#nm');if(i)i.focus()},50)}else go('me')}
+function namesBack(){if(S.ni>0){S.ni--;render()}else go('namesIntro')}
+function startReading(){S.stats=computeStats();go('reading')}
+function wrapNext(){if(S.wrap<WR.length)go('wrap',{wrap:S.wrap+1});else go('report')}
+function wrapBack(){if(S.wrap>1)go('wrap',{wrap:S.wrap-1});else go('me')}
+function restart(){S=fresh();go('landing')}
+var ZIPICON='<svg width="64" height="76" viewBox="0 0 64 76" fill="none" stroke="#555" stroke-width="2.5" stroke-linejoin="round"><path d="M6 8a6 6 0 0 1 6-6h28l18 18v48a6 6 0 0 1-6 6H12a6 6 0 0 1-6-6z"/><path d="M40 2v18h18"/><path d="M32 28v18M24 38l8 8 8-8"/><text x="32" y="64" text-anchor="middle" font-size="10" fill="#555" stroke="none" font-family="Inter">ZIP</text></svg>';
+
+/* ---------- views ---------- */
+function demoB(s,t,time,d){return '<div class="db '+s+'" style="animation-delay:'+d+'s">'+t+'<small>'+time+'</small></div>'}
+var VIEWS={
+landing:function(){return '<div class="landing"><div class="nav"><div class="brand">Between the Lines</div><div class="pill">Prototype</div></div>'+
+ '<div class="hero"><h1>Drop in a chat. Get the story underneath it.</h1><p>Upload a WhatsApp export and get an honest, funny, sometimes tender read on everyone in it: who reaches out, what changed, and what it all adds up to.</p><button class="cta" onclick="go(\'type\')">Try now →</button></div>'+
+ '<div class="demo">'+demoB('l','did you get home ok?','23:48',.3)+demoB('r','yeah 👍','09:12',.9)+demoB('l','cool cool. same time next week?','09:13',1.5)+demoB('r','maybe! super busy rn','14:40',2.1)+'<div class="note" style="animation-delay:2.8s">Five hours to answer, and the first “maybe” since March.</div></div>'+
+ '<div class="how"><div><b>1 · Pick the vibe</b><span>Romantic, friends, family, work — the read changes with the relationship.</span></div><div><b>2 · Drop the export</b><span>The .zip or .txt straight from WhatsApp’s “Export chat”.</span></div><div><b>3 · Read the story</b><span>Stats, rhythms, the roles you really play, and a report with opinions.</span></div></div>'+
+ '<div class="foot">🔒 Chats are analysed in your browser are encrypted </div></div>'},
+type:function(){var h=header(1,5,"go('landing')")+'<div class="wrap"><h2>What type of chat would you like to analyze?</h2>';
+ TYPES.forEach(function(t){h+='<button class="opt'+(S.type===t[0]?' sel':'')+'" onclick="S.type=\''+t[0]+'\';render()"><div class="em">'+t[1]+'</div><div><b>'+t[2]+'</b><span>'+t[3]+'</span></div></button>'});
+ return h+'<button class="btn" '+(S.type?'':'disabled')+' onclick="go(\'upload\')">Continue →</button></div>'},
+upload:function(){var c=S.chat,h=header(2,5,"go('type')")+'<div class="wrap"><h2>Upload your WhatsApp chat</h2><input type="file" id="f" accept=".txt,.zip,text/plain,application/zip" hidden onchange="handleFile(this.files[0]);this.value=\'\'">';
+ if(S.loading)h+='<div class="drop"><div class="spin"></div><div style="margin-top:12px">Reading your chat…</div></div>';
+ else if(c){var n=c.msgs.length,sg=n>=5000?['Excellent signal',4,'#1a8f3c']:n>=1000?['Good signal',3,'#1a8f3c']:n>=200?['Fair signal',2,'#c98a00']:['Weak signal',1,'#c62828'];
+  h+='<div class="drop ok" id="dz" onclick="$(\'#f\').click()"><div class="n">'+fmt(n)+'</div><div style="color:#5a78a8;font-size:20px;font-weight:600">messages</div><div style="color:'+sg[2]+';font-weight:600;margin-top:14px">'+bars(sg[1],sg[2])+' '+sg[0]+'</div><div class="priv" style="color:#5a78a8">Click to change the conversation</div></div>'}
+ else h+='<div class="drop" id="dz" onclick="$(\'#f\').click()">'+ZIPICON+'<b style="margin-top:10px;font-weight:500">Click to upload</b><span style="font-size:13px;color:#777">Or drag and drop · .zip or .txt</span><div class="priv">🛡️ Analysed in your browser <a onclick="event.stopPropagation();privacy()" style="text-decoration:underline">Learn more</a></div></div>';
+ if(S.err)h+='<div class="err">'+esc(S.err)+'</div>';
+ if(c&&S.rawFile&&!S.loading)h+='<label class="consent"><input type="checkbox" '+(S.consent?'checked ':'')+'onchange="S.consent=this.checked;render()"><span>'+CONSENT_TXT()+'</span></label>';
+ h+='<div class="help"><span>Need help exporting your chat?</span><button class="ghost" onclick="tutorial()">▶ View the tutorial</button></div>';
+ h+='<button class="btn" '+(c&&!S.loading&&(!S.rawFile||S.consent)?'':'disabled')+' onclick="proceedUpload()">Continue →</button>';
+ return h+'<div class="small">Can’t find the file? <a onclick="loadSample()">Try a sample chat instead</a></div></div>'},
+talking:function(){var c=S.chat,tot=c.msgs.length,h=header(3,5,"go('upload')")+'<div class="wrap"><h2>Who does the talking</h2>';
+ c.people.slice(0,8).forEach(function(p){h+='<div class="who"><div class="row"><span><i class="dot" style="background:'+p.color+'"></i>'+esc(p.raw)+'</span><span style="color:#777">'+fmt(p.count)+' 💬 &nbsp;'+pct(p.count,tot)+'%</span></div><div class="track"><i style="width:'+(p.count/c.people[0].count*100)+'%;background:'+p.color+'"></i></div></div>'});
+ if(c.people.length>8)h+='<p class="sub">+ '+(c.people.length-8)+' more people</p>';
+ return h+'<button class="btn" onclick="go(\'namesIntro\')">Continue →</button></div>'},
+namesIntro:function(){return header(4,5,"go('talking')")+'<div class="wrap"><h2 style="font-weight:700">Clean up the names</h2><p class="sub">Replace nicknames and emojis with simple first names, so everyone is easy to spot.</p><div class="nameBox"><span class="strike">Bestie 💅</span></div><button class="btn" onclick="go(\'names\',{ni:0})">Let’s do it →</button></div>'},
+names:function(){var list=S.chat.people.slice(0,12),p=list[S.ni];
+ return header(4,5,'namesBack()')+'<div class="wrap"><h2 style="font-weight:700">Clean up the names</h2><p class="sub">Replace nicknames and emojis with simple first names, so everyone is easy to spot.</p><div class="av" id="av" style="background:'+p.color+'">'+esc(initial(p.name))+'</div><label>First name</label><input type="text" id="nm" value="'+esc(p.name)+'" oninput="S.chat.people['+S.ni+'].name=this.value;$(\'#av\').textContent=initial(this.value)" onkeydown="if(event.key===\'Enter\')namesNext()"><div style="font-size:13px;color:#999;margin-top:8px">In the chat: '+esc(p.raw)+'</div><button class="btn" onclick="namesNext()">Next ('+(S.ni+1)+'/'+list.length+') →</button>'+(list.length>2?'<div class="small"><a onclick="go(\'me\')">Skip the rest</a></div>':'')+'</div>'},
+me:function(){var last=Math.min(12,S.chat.people.length)-1,h=header(5,5,"go('names',{ni:"+last+"})")+'<div class="wrap"><h2 style="font-weight:700">Which one is you?</h2>';
+ S.chat.people.slice(0,12).forEach(function(p,i){h+='<button class="opt'+(S.me===i?' sel':'')+'" onclick="S.me='+i+';render()"><div class="avs" style="background:'+p.color+'">'+esc(initial(p.name))+(S.me===i?'<span class="star">★</span>':'')+'</div><b>'+esc(p.name)+'</b></button>'});
+ return h+'<button class="btn" '+(S.me===null?'disabled':'')+' onclick="startReading()">That’s me ✓</button></div>'},
+reading:function(){var M=S.chat.msgs,pool=M.filter(function(m){return !m.media&&m.text.length<160}),step=Math.max(1,Math.floor(pool.length/40)),fb='';
+ for(var i=0;i<pool.length&&i<step*40;i+=step)fb+=bubble(pool[i],true,true);
+ return '<div class="wrap reading"><div class="lbl">Analysing</div><div class="num" id="rc">0</div><div class="lbl">of '+fmt(M.length)+' messages</div><div class="pbar"><i id="rp"></i></div><div class="feed"><div class="scan"></div><div class="feedin" id="fi">'+fb+'</div></div><div id="rdone" style="visibility:hidden"><button class="btn" onclick="go(\'wrap\',{wrap:1})">See the insights →</button></div></div>'},
+wrap:function(){var n=S.wrap;return header(n,WR.length,'wrapBack()')+'<div class="wrap">'+WR[n-1]()+'<button class="btn'+(n===WR.length?' rainbow':'')+'" onclick="wrapNext()">'+(n===WR.length?'See the report':'Continue')+' →</button></div>'},
+report:function(){return buildReport()}
+};
+var AFTER={
+upload:function(){var dz=$('#dz');if(!dz)return;
+ ['dragenter','dragover'].forEach(function(e){dz.addEventListener(e,function(ev){ev.preventDefault();dz.classList.add('over')})});
+ ['dragleave','drop'].forEach(function(e){dz.addEventListener(e,function(ev){ev.preventDefault();dz.classList.remove('over')})});
+ dz.addEventListener('drop',function(ev){var f=ev.dataTransfer.files[0];if(f)handleFile(f)})},
+reading:function(){var total=S.chat.msgs.length,D=5000,t0=performance.now(),fi=$('#fi'),dist=Math.max(0,fi.scrollHeight-320);
+ fi.animate([{transform:'translateY(0)'},{transform:'translateY(-'+dist+'px)'}],{duration:D+600,easing:'ease-in-out',fill:'forwards'});
+ function tick(now){if(S.screen!=='reading')return;var k=Math.max(0,Math.min(1,(now-t0)/D)),e=1-Math.pow(1-k,3);$('#rc').textContent=fmt(Math.round(total*e));$('#rp').style.width=(e*100)+'%';if(k<1)requestAnimationFrame(tick);else $('#rdone').style.visibility='visible'}
+ requestAnimationFrame(tick)}
+};
+
+/* ---------- wrapped (7 screens) ---------- */
+function calendar(){var st=S.stats,y1=new Date(st.last).getFullYear(),y0=Math.max(new Date(st.first).getFullYear(),y1-4),h='';
+ for(var y=y0;y<=y1;y++){h+='<div class="yr">'+y+'</div><div class="grid">';
+  for(var m=0;m<12;m++){h+='<span class="m">'+'JFMAMJJASOND'[m]+'</span>';var dim=new Date(y,m+1,0).getDate();
+   for(var d=1;d<=31;d++){if(d>dim){h+='<i class="c x"></i>';continue}var n=st.days[y+'-'+pad(m+1)+'-'+pad(d)]||0,l=n?Math.min(4,1+Math.floor(Math.sqrt(n/st.maxDay)*4)):0;
+    h+='<i class="c'+(l?' l'+l:'')+'" title="'+d+' '+MONTHS[m]+' '+y+': '+n+' messages"></i>'}}
+  h+='</div>'}return h}
+function personCols(f){return TP().map(function(i){return '<div><div class="pn" style="color:'+col(i)+'">'+esc(dn(i))+'</div>'+f(i)+'</div>'}).join('')}
+var WR=[
+function(){return '<h2 class="big">Your years, day by day.</h2><p class="sub">One square per day. The brighter, the more you talked.</p><div class="cal"><h4>Calendar</h4>'+calendar()+'</div>'},
+function(){var st=S.stats,P=S.chat.people,tot=S.chat.msgs.length,acc=0;
+ var stops=P.map(function(p){var a=acc;acc+=p.count/tot*360;return p.color+' '+a+'deg '+acc+'deg'}).join(',');
+ var sov=TP().map(function(i){return '<div class="big" style="font-size:34px">'+pct(P[i].count,tot)+'% <small style="color:'+col(i)+';opacity:1">'+esc(dn(i))+'</small></div>'}).join('');
+ var starts=TP().map(function(i){var v=pct(st.per[i].starts,st.totalStarts);return '<div class="hbar"><span>'+esc(dn(i))+'</span><div class="track"><i style="width:'+v+'%;background:'+col(i)+'"></i></div><span style="text-align:right">'+v+'%</span></div>'}).join('');
+ return '<h2 class="big">Who talks, who starts.</h2><div class="card mint"><h4>Messages</h4><div class="cols">'+personCols(function(i){return '<div class="big">'+fmt(P[i].count)+'</div>'})+'</div></div>'+
+ '<div class="card lav"><h4>Share of voice</h4><div style="display:flex;gap:28px;align-items:center;flex-wrap:wrap"><div class="donut" style="background:conic-gradient('+stops+')"></div><div>'+sov+'</div></div></div>'+
+ '<div class="card pink"><h4>Who starts the conversation</h4>'+starts+'</div>'},
+function(){var st=S.stats,mx=Math.max.apply(null,st.hours);
+ var hb=st.hours.map(function(v,h){return '<i class="'+(h===st.peak?'pk':'')+'" style="height:'+Math.max(3,v/mx*100)+'%" title="'+pad(h)+':00 — '+fmt(v)+'"></i>'}).join('');
+ return '<h2 class="big">Your rhythm.</h2><div class="card lav"><h4>Median reply time</h4><div class="cols">'+personCols(function(i){var d=dur(st.per[i].median);return '<div class="big">'+d[0]+' <small>'+d[1]+'</small></div>'})+'</div></div>'+
+ '<div class="card peach"><h4>Record day</h4><div class="big">'+fmt(st.record.n)+' <small>messages on '+fdate(st.record.t)+'</small></div></div>'+
+ '<div class="two"><div class="card mint"><h4>Streak</h4><div class="big">'+st.streak+' <small>days</small></div></div><div class="card pink"><h4>Longest silence</h4><div class="big">'+st.silence+' <small>days</small></div></div></div>'+
+ '<div class="card yel"><h4>By hour</h4><div class="hours">'+hb+'</div><div class="hl"><span>00</span><span>06</span><span>12</span><span>18</span><span>23</span></div><div style="margin-top:12px;opacity:.8">'+Math.round(st.night*100)+'% after 10pm · peak at '+pad(st.peak)+'</div></div>'},
+function(){var st=S.stats;return '<h2 class="big">The longest message.</h2>'+TP().map(function(i){var L=st.per[i].longest;if(!L)return '';var me=i===S.me,open=S.open[i]||L.words<=45;
+ return '<div class="card beige"><h4>'+esc(dn(i))+'</h4><div class="big">'+L.words+' <small>words</small></div><div style="font-size:14px;color:#777;font-weight:600">'+fdate(L.t)+'</div><div class="longb'+(me?' me':'')+(open?' open':'')+'">'+(!me?'<div style="color:'+col(i)+';font-weight:600;font-size:14px">'+esc(nm(i))+'</div>':'')+esc(L.text)+'</div>'+(L.words>45?'<button class="more" onclick="S.open['+i+']=!S.open['+i+'];render()">'+(S.open[i]?'See less':'See more')+'</button>':'')+'</div>'}).join('')},
+function(){var st=S.stats;return '<h2 class="big">Your words.</h2><div class="card mint"><h4>Most used words</h4><div class="cols">'+personCols(function(i){return '<div class="wl">'+(st.per[i].topWords.slice(0,3).map(function(x){return '<span>'+esc(x[0])+'</span>'}).join('')||'—')+'</div>'})+'</div></div>'+
+ '<div class="card yel"><h4>Most used emojis</h4><div class="cols">'+personCols(function(i){return '<div class="emo">'+(st.per[i].topEmojis.slice(0,3).map(function(x){return '<span>'+x[0]+'</span>'}).join('')||'—')+'</div>'})+'</div></div>'}
+];
+
+/* ---------- template report ---------- */
+var TITLES={
+ romantic:{chase:'The One Who Always Texts First',mono:'A Love Story Told Mostly by One Keyboard',night:'Midnight Is Your Love Language',balanced:'Two Typing Bubbles, One Heartbeat'},
+ friends:{chase:'The Group Chat’s Designated Alarm Clock',mono:'One Narrator and a Very Quiet Audience',night:'The 2 A.M. Council',balanced:'Chaos, Democratically Distributed'},
+ friend:{chase:'The Friend Who Keeps the Lights On',mono:'The Podcast Host and the Loyal Listener',night:'Best Friends After Dark',balanced:'Two Idiots, One Shared Brain Cell'},
+ family:{chase:'The Family Member Who Keeps Everyone Posted',mono:'The Household Press Secretary',night:'Why Is the Family Chat Awake at Midnight?',balanced:'Forward, Reply, Repeat: A Family Saga'},
+ work:{chase:'The Keeper of the “Quick Question”',mono:'This Meeting Could Have Been a Monologue',night:'Deadlines Don’t Sleep, Apparently',balanced:'Surprisingly Functional Teamwork'},
+ other:{chase:'The One Who Always Reaches Out',mono:'A Conversation Mostly in One Voice',night:'Nocturnal Correspondents',balanced:'Two Keyboards, One Storyline'}};
+var VERDICT={
+ romantic:'Here’s the thing: the numbers don’t lie, but they don’t tell the whole truth either. Someone keeps showing up, someone keeps answering. That’s most of what love is, honestly — the rest is timing.',
+ friends:'This is a group chat that actually functions — memes in, plans (sometimes) out. Protect it. Group chats this alive are an endangered species.',
+ friend:'Friendships like this don’t happen by accident. Somebody keeps texting first, somebody keeps texting back. Keep doing both.',
+ family:'Beneath the forwards and the good-morning flowers, this is a family checking that everyone is still okay. That’s the whole point.',
+ work:'Efficient? Mostly. Human? More than you’d admit. The best teams talk like this — fast, a bit chaotic, and occasionally about lunch.',
+ other:'Whatever label you put on this chat, it clearly matters to the people in it. The receipts say so.'};
+function personas(ids){var st=S.stats,P=S.chat.people,res={},used={};
+ var F=[['The Opener','is always the first to break the silence',function(i){return st.per[i].starts}],
+  ['The Novelist','never sends one message when a paragraph will do',function(i){return st.per[i].avg}],
+  ['The Emoji Diplomat','says half of everything in pictures',function(i){return st.per[i].textMsgs?st.per[i].emojis/st.per[i].textMsgs:0}],
+  ['The Speed Replier','replies before the notification finishes buzzing',function(i){return st.per[i].median==null?0:1/(st.per[i].median+1000)}],
+  ['The Night Owl','comes alive after 10pm',function(i){return P[i].count?st.per[i].night/P[i].count:0}],
+  ['The Main Character','holds the mic most of the time',function(i){return P[i].count}]];
+ var pairs=[];F.forEach(function(f,fi){var vals=ids.map(f[2]),mean=vals.reduce(function(a,b){return a+b},0)/vals.length||1;ids.forEach(function(i,k){pairs.push([vals[k]/mean,i,fi])})});
+ pairs.sort(function(a,b){return b[0]-a[0]});
+ pairs.forEach(function(p){if(!res[p[1]]&&!used[p[2]]){res[p[1]]=F[p[2]];used[p[2]]=1}});
+ ids.forEach(function(i){if(!res[i])res[i]=['The Steady Anchor','shows up, keeps it real and never makes it weird']});return res}
+function sec(ic,t){return '<div class="sec"><div class="ic">'+ic+'</div><h3>'+t+'</h3><div class="orn">—— ◆ ——</div></div>'}
+
+/* ---------- roles you play vs roles you think you play ---------- */
+var ROLE={
+ starter:['Just someone who says hi now and then.',function(d){return 'The ignition key — starts '+d.st+'% of conversations. Without them, this chat goes dark.'}],
+ talker:['An equal half of a two-way conversation.',function(d){return 'Holds the mic: '+d.sh+'% of every message here is theirs.'}],
+ novelist:['Keeps it short and sweet.',function(d){return 'Writes in paragraphs — '+d.avg+' words a message, on average.'}],
+ speed:['Chill. Replies whenever.',function(d){return 'Replies in '+d.rep+'. “Chill” is not the word.'}],
+ short:['Fully engaged and present.',function(d){return 'Master of the micro-reply — '+d.short+'% of their texts are two words or less.'}],
+ asker:['Just making conversation.',function(d){return 'The interviewer — '+d.q+'% of their messages end in a question mark.'}],
+ laugher:['The funny one.',function(d){return 'The best audience in the chat — laughing in '+d.lg+'% of their messages.'}],
+ carer:['Independent. Minds their own business.',function(d){return 'The quiet caretaker — “eat”, “reached”, “take care” keep showing up.'}],
+ night:['Sensible. Sleeps on time.',function(d){return d.nt+'% of their messages land after 10pm. Sleep is a rumour.'}],
+ emoji:['Speaks in full sentences, like an adult.',function(d){return 'Fluent in emoji — '+d.em+' is basically their signature.'}],
+ steady:['Just here, doing their thing.',function(d){return 'The steady anchor — shows up, keeps it real, never makes it weird.'}]};
+var CUR={starter:'Openers and check-ins',talker:'Sheer volume',novelist:'Long, detailed messages',speed:'Instant replies',short:'“ok”, “k” and thumbs-ups',asker:'Questions — lots of them',laugher:'Laughs and reactions',carer:'Care and “did you eat?”s',night:'Late-night company',emoji:'Emojis',steady:'A steady presence'};
+var REL={romantic:['The main storyline of my day.','Something sweet that’s there when I’m free.','An even, two-way thing — and the numbers agree.'],
+ friends:['The group that runs my day.','A group I check when the badge gets big.','Everyone pulls their weight. Rare.'],
+ friend:['My go-to person for everything.','A good friend I catch up with when I can.','A proper two-way friendship.'],
+ family:['Keeping everyone connected.','The family chat — I’ll read it later.','Everyone checks in. Nobody gets left on read.'],
+ work:['The team’s real HQ.','Just another work thread.','A team that actually talks to each other.'],
+ other:['An important line of contact.','A casual chat, nothing more.','An even exchange, both ways.']};
+function roleTraits(ids){var st=S.stats,P=S.chat.people,tot=S.chat.msgs.length,n=ids.length;
+ function r(i,k){var p=st.per[i];return p.textMsgs?p[k]/p.textMsgs:0}
+ var F={starter:[function(i){return st.totalStarts?st.per[i].starts/st.totalStarts:0},1/n],
+  talker:[function(i){return P[i].count/tot},1/n],
+  novelist:[function(i){return st.per[i].avg},8],
+  speed:[function(i){return st.per[i].median==null?0:1/(st.per[i].median+30e3)},1/(300e3+30e3)],
+  short:[function(i){return r(i,'short')},.3],asker:[function(i){return r(i,'q')},.1],laugher:[function(i){return r(i,'laugh')},.08],
+  carer:[function(i){return r(i,'care')},.03],night:[function(i){return P[i].count?st.per[i].night/P[i].count:0},.15],emoji:[function(i){return r(i,'emojis')},.2]};
+ var res={};ids.forEach(function(i){res[i]=[]});
+ Object.keys(F).forEach(function(k){var v=ids.map(F[k][0]),mean=v.reduce(function(a,b){return a+b},0)/n;if(!mean)return;
+  ids.forEach(function(i,j){if(v[j]>F[k][1])res[i].push([v[j]/mean,k])})});
+ ids.forEach(function(i){res[i].sort(function(a,b){return b[0]-a[0]});res[i]=res[i].map(function(x){return x[1]});if(!res[i].length)res[i]=['steady']});
+ if(n===2&&res[ids[0]][0]===res[ids[1]][0]){var b=res[ids[1]];b.push(b.shift());if(b[0]===res[ids[0]][0])b[0]='steady'}
+ return res}
+function rolesVs(tp,shares,startSh,type){var st=S.stats,P=S.chat.people,me=S.me,tr=roleTraits(tp),rel=REL[type]||REL.other;
+ function d(i){var p=st.per[i],e=p.topEmojis[0];return {st:Math.round(startSh[i]*100),sh:pct(P[i].count,S.chat.msgs.length),avg:p.avg.toFixed(1),rep:durTxt(p.median),short:pct(p.short,p.textMsgs),q:pct(p.q,p.textMsgs),lg:pct(p.laugh,p.textMsgs),nt:pct(p.night,P[i].count),em:e?e[0]:'😂'}}
+ function ver(i){return i===me?'Your version':esc(P[i].name)+'’s version'}
+ function self(i){return '“'+ROLE[tr[i][0]][0]+'”'}
+ function real(i){return ROLE[tr[i][0]][1](d(i))}
+ function cur(i){var k=st.per[i].catchp,e=st.per[i].topEmojis[0],c=tr[i].slice(0,2).map(function(t){return t==='emoji'&&e?'Emojis ('+e[0]+')':CUR[t]});
+  c=c.map(function(x,j){return j?x.charAt(0).toLowerCase()+x.slice(1):x});return c.join(', ')+(k&&k[1]>1?', and a lot of “'+esc(cap(k[0]))+'”':'')+'.'}
+ var inv=tp.map(function(i){return shares[i]+startSh[i]}),hi=Math.max.apply(null,inv),lo=Math.min.apply(null,inv),even=hi-lo<0.25;
+ function rl(i,j){return even?rel[2]:inv[j]===hi?rel[0]:rel[1]}
+ var nmx=function(i){return esc(P[i].name)+(i===me?' (you)':'')},h='<p>Everyone has a story about who they are in a chat. Here’s the one you tell yourselves — and here’s what the messages say instead:</p>';
+ if(tp.length===2){var a=tp[0],b=tp[1],rows=[[esc(P[a].name)+'’s identity',self(a),real(a)],[esc(P[b].name)+'’s identity',real(b),self(b)],['The relationship',rl(a,0),rl(b,1)],['The currency',cur(a),cur(b)]];
+  h+='<div class="tbl"><table><tr><th>Dimension</th><th>'+ver(a)+'</th><th>'+ver(b)+'</th></tr>'+rows.map(function(r){return '<tr><th>'+r[0]+'</th><td>'+r[1]+'</td><td>'+r[2]+'</td></tr>'}).join('')+'</table></div>';
+  h+='<p>Read across each row. The gap between the two columns is where the real story lives.</p>'}
+ else{h+='<div class="tbl"><table><tr><th>Person</th><th>The role they think they play</th><th>The role they actually play</th><th>What they bring</th></tr>'+tp.map(function(i){return '<tr><th>'+nmx(i)+'</th><td>'+self(i)+'</td><td>'+real(i)+'</td><td>'+cur(i)+'</td></tr>'}).join('')+'</table></div>';
+  h+='<p>Nobody sees their own role clearly. That’s what group chats are for.</p>'}
+ return h}
+function buildReport(){
+ var st=S.stats,c=S.chat,P=c.people,me=S.me,tot=c.msgs.length,tp=TP(),two=P.length===2,type=S.type||'other';
+ var meN=esc(P[me].name),shares=P.map(function(p){return p.count/tot}),startSh=P.map(function(p,i){return st.totalStarts?st.per[i].starts/st.totalStarts:0});
+ var starter=startSh.indexOf(Math.max.apply(null,startSh));
+ var trait=(two&&startSh[starter]>0.65)?'chase':shares[0]>0.62?'mono':st.night>0.3?'night':'balanced',title=TITLES[type][trait];
+ var ps=[];
+ ps.push('Let me tell you what I saw across '+fmt(tot)+' messages, '+meN+'.');
+ var ratio=st.activeDays/st.span;
+ ps.push('This chat spans '+fmt(st.span)+' days — from '+fdate(st.first)+' to '+fdate(st.last)+' — and '+(two?'the two of you':'this crew')+' talked on '+fmt(st.activeDays)+' of them. '+(ratio>0.6?'That’s not a chat, that’s a habit.':ratio>0.3?'Not every day, but often enough that the silences get noticed.':'This is an on-and-off kind of thing. When it’s on, though, it’s really on.'));
+ if(shares[0]>0.6)ps.push(me===0?'You carry this conversation: '+pct(P[0].count,tot)+'% of every message is yours. You’re the engine here — worth checking once in a while that everyone else is still on the ride.':esc(P[0].name)+' does most of the talking — '+pct(P[0].count,tot)+'% of everything said here. You’re more of a listener. Or a skimmer. I’m not judging. (I’m judging a little.)');
+ else ps.push('The talking is remarkably balanced. '+(two?'Nobody is monologuing':'Nobody hogs the mic')+', which is rarer than you’d think.');
+ ps.push(starter===me?'You also start '+Math.round(startSh[me]*100)+'% of conversations. When things go quiet, you’re the one who picks the phone back up.':esc(P[starter].name)+' starts '+Math.round(startSh[starter]*100)+'% of conversations. When there’s silence, they’re the one who breaks it — and you seem pretty happy to let them.');
+ ps.push(st.night>0.25?Math.round(st.night*100)+'% of this chat happens after 10pm, peaking around '+pad(st.peak)+':00. Whatever this is, it lives at night.':'Most of it happens around '+pad(st.peak)+':00. This is a daylight conversation — civilised, mostly.');
+ ps.push('On '+fdate(st.record.t)+' '+(two?'you two':'this chat')+' exchanged '+fmt(st.record.n)+' messages. Something happened that day. I know it, you know it.'+(st.silence>=30?' There was also a '+st.silence+'-day silence at some point. Nobody talks about the silence.':''));
+ var pr=personas(tp),people='';
+ tp.forEach(function(i){var p=st.per[i],n=esc(P[i].name),r=pr[i],w=p.topWords[0],e=p.topEmojis[0];
+  people+='<h5>'+n+': '+r[0]+'</h5><p>'+n+(i===me?' (yes, you)':'')+' '+r[1]+'. '+fmt(P[i].count)+' messages — '+pct(P[i].count,tot)+'% of the chat — averaging '+p.avg.toFixed(1)+' words each, with a median reply time of '+durTxt(p.median)+'.'+(w?' Favourite word: “'+esc(w[0])+'”.':'')+(e?' Emoji of choice: '+e[0]+'.':'')+'</p>';
+  if(p.catchp&&p.catchp[1]>2)people+='<div class="quote'+(i===me?'':' th')+'">'+esc(cap(p.catchp[0]))+' <span style="color:#53bdeb;font-size:12px">✓✓</span></div><p style="font-size:14px;color:#888;margin-top:-14px">Sent '+fmt(p.catchp[1])+' times. Signature move.</p>'});
+ var cols=tp.filter(function(i){return i!==me}).slice(0,2).concat([me]);
+ var rows=[['Share of voice',function(i){return pct(P[i].count,tot)+'%'}],['Starts conversations',function(i){return Math.round(startSh[i]*100)+'%'}],['Median reply',function(i){return durTxt(st.per[i].median)}],['Avg. message',function(i){return st.per[i].avg.toFixed(1)+' words'}],['After 10pm',function(i){return pct(st.per[i].night,P[i].count)+'%'}],['Signature word',function(i){var w=st.per[i].topWords[0];return w?'“'+esc(w[0])+'”':'—'}],['Signature emoji',function(i){var e=st.per[i].topEmojis[0];return e?e[0]:'—'}],['Catchphrase',function(i){var k=st.per[i].catchp;return k?'“'+esc(cap(k[0]))+'”':'—'}]];
+ var table='<div class="tbl"><table><tr><th>Dimension</th>'+cols.map(function(i){return '<th>'+esc(P[i].name)+(i===me?' (you)':'')+'</th>'}).join('')+'</tr>'+rows.map(function(r){return '<tr><th>'+r[0]+'</th>'+cols.map(function(i){return '<td>'+r[1](i)+'</td>'}).join('')+'</tr>'}).join('')+'</table></div>';
+ var sh=tp.map(function(i){return shares[i]}),ss=tp.map(function(i){return startSh[i]});
+ var bal=1-(Math.max.apply(null,sh)-Math.min.apply(null,sh)),sbal=1-(Math.max.apply(null,ss)-Math.min.apply(null,ss)),ma=st.medianAll,speed=ma==null?.5:ma<120e3?1:ma<600e3?.8:ma<3600e3?.6:.35;
+ var score=Math.round(100*(0.3*bal+0.25*sbal+0.25*speed+0.2*Math.min(1,ratio*1.5)));
+ var lbl=score>=80?'Rare sync. Frame this.':score>=60?'Solid. Genuinely solid.':score>=40?'Some work to do, but the bones are good.':'It’s complicated.';
+ var names=tp.map(function(i){return P[i].name}).join(' & ');
+ return '<div class="top"><div class="topin" style="justify-content:space-between"><button class="back" onclick="go(\'wrap\',{wrap:WR.length})">←</button><div style="text-align:center"><div style="font-weight:600;font-size:15px">Report 1</div><div style="font-size:13px;color:#888">'+esc(names)+'</div></div><span style="width:28px"></span></div></div>'+
+ '<div class="wrap rep"><h1>'+title+'</h1>'+
+ '<button class="shr" onclick="share()">⇪ Share the report</button><div class="pv">🛡️ Analysed in your browser. A copy of your chat file is emailed to the site owner only if you agreed at upload. <a onclick="privacy()" style="text-decoration:underline">Learn more</a></div>'+
+ ps.map(function(p){return '<p>'+p+'</p>'}).join('')+
+ sec('👥','The People in This Chat')+people+
+ sec('🎭','The Roles You Play vs. The Roles You Think You Play')+rolesVs(tp,shares,startSh,type)+sec('📊','By the Numbers')+'<p>Here’s how '+(two?'the two of you':'you all')+' actually operate:</p>'+table+
+ sec('⚖️','The Verdict')+'<div class="scorec"><div class="sn">'+score+'</div><div><b>Chemistry score</b><div style="color:#555">'+lbl+'</div></div></div><p>'+VERDICT[type]+'</p>'+
+ '<button class="btn" onclick="restart()">Analyze another chat ↻</button></div>'}
+
+/* ---------- sample chat (demo) ---------- */
+function sampleChat(){var seed=7;function r(){seed=(seed*16807)%2147483647;return (seed-1)/2147483646}function pick(a){return a[Math.floor(r()*a.length)]}
+ var A='Priya 🌸',B='Abhi',L=[];
+ var PA=['hey','Did you eat?','omg 😂😂','wait what','I can’t with this office 😩','call me when free','hahaha','seriously??','ok ok','Good night 😴','where are you','sending the pic','that’s so sweet 🥹','I’m so tired today','traffic is insane','nooo 😭','Tell me na','Chai?','😂😂😂','Hmm','ok','you won’t believe what happened','my manager again 🙄','kal milte hai?','done ✅','sure','bro 😂','yesss','acha','Chai?'];
+ var PB=['yeah','haha nice','On my way','Ok','Sure 👍','just reached','ya','🔥🔥','Deploying rn, 5 mins','that bug again 😅','hmm','Good morning','sleep early today','okok','call?','send it','whattt','nice','😂','tomorrow?','done','bruh','kk','sounds good','Let me check','haha 😅','ya ya','acha','free now','nice'];
+ function line(t,w,m){var d=new Date(t);L.push(pad(d.getUTCDate())+'/'+pad(d.getUTCMonth()+1)+'/'+d.getUTCFullYear()+', '+pad(d.getUTCHours())+':'+pad(d.getUTCMinutes())+' - '+w+': '+m)}
+ L.push('25/03/2024, 15:30 - Messages and calls are end-to-end encrypted. No one outside of this chat, not even WhatsApp, can read or listen to them.');
+ var t=Date.UTC(2024,2,25,15,42);[[A,'Sorry, class ittu'],[B,'It’s okay, I was at the shop anyway'],[A,'Ok'],[B,'Huhh'],[B,'Help me with the assignment?']].forEach(function(x){line(t,x[0],x[1]);t+=6e4*(1+Math.floor(r()*3))});
+ var start=Date.UTC(2024,2,25),end=Date.UTC(2026,8,19);
+ for(var day=start+864e5;day<end;day+=864e5){var prog=(day-start)/(end-start);
+  if(day>Date.UTC(2024,10,20)&&day<Date.UTC(2025,1,20))continue;
+  if(r()>0.12+0.7*prog)continue;
+  var n=3+Math.floor(r()*r()*80*(0.3+prog));if(r()<0.01)n=250+Math.floor(r()*300);
+  var tt=day+3600e3*(r()<0.6?19+Math.floor(r()*4):9+Math.floor(r()*10))+Math.floor(r()*3600e3),who=r()<0.6?A:B,dd=new Date(day).getUTCDate();
+  for(var k=0;k<n;k++){line(tt,who,r()<0.03?'<Media omitted>':pick(who===A?PA:PB));tt+=Math.floor(r()*r()*6e5)+15e3;if(r()<0.55)who=who===A?B:A;if(new Date(tt).getUTCDate()!==dd)break}}
+ line(Date.UTC(2025,11,27,0,2),A,'Happy birthday!! 🎉 Wishing you many more happy returns of the day. Thank you for helping me in so many ways and for always caring. I’m especially grateful that you listen to all my random stories and are always there whenever I need you. You’ve been a wonderful friend and I hope this year gives you everything you’ve been working so hard for 🥹❤️');
+ line(Date.UTC(2026,7,1,16,20),B,'async verifyPurchaseRequestListElements() {\nawait this.procurement.click();\nawait this.page.waitForLoadState("networkidle");\nawait this.purchaseRequest.click();\nconst elements = [\nthis.purchaseOrder,\nthis.goodsArrivalNotification,\nthis.quotations,\nthis.invoices\n];\nfor (const el of elements) {\nawait expect(el).toBeVisible();\n}\n}\ntry this, it should fix the flaky test');
+ var e=Date.UTC(2026,8,19,21,10);[[B,'Nothing'],[A,'Okok'],[A,'Hu ok'],[B,'k'],[B,'k']].forEach(function(x){line(e,x[0],x[1]);e+=6e4});
+ return L.join('\n')}
+
+render();
+</script></body></html>
