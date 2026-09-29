@@ -257,7 +257,7 @@ function modal(h){$('#modal').innerHTML='<div class="mbg" onclick="if(event.targ
 function closeModal(){$('#modal').innerHTML=''}
 function toast(t){var d=document.createElement('div');d.className='toast';d.textContent=t;document.body.appendChild(d);setTimeout(function(){d.remove()},2200)}
 function tutorial(){modal('<h3>Export a WhatsApp chat</h3><b>Android</b><ol><li>Open the chat → tap ⋮ (top right)</li><li>More → Export chat</li><li>Choose <b>Without media</b></li><li>Save it to Files / Drive or email it to yourself</li></ol><b>iPhone</b><ol><li>Open the chat → tap the contact or group name</li><li>Scroll down → Export Chat</li><li>Choose <b>Without Media</b> → Save to Files</li></ol><p style="color:#666;font-size:14px">Upload the .zip as-is, or the .txt inside it.</p>')}
-function privacy(){modal('<h3>🛡️ How your chat is handled</h3><p style="margin-bottom:6px">Your chat is analysed <b>inside this browser tab</b>. For this internal test, if you tick the consent box on the upload step, a copy of the chat file is also <b>emailed to the site owner</b> for reference. Without your consent nothing is sent.</p>')}
+function privacy(){modal('<h3>🛡️ How your chat is handled</h3><p style="margin-bottom:6px">Your chat is analysed <b>inside this browser tab</b>.</p>')}
 function share(){var t=$('.rep h1').textContent,txt=t+' — my chat, read between the lines.';if(navigator.share){navigator.share({title:t,text:txt}).catch(function(){})}else if(navigator.clipboard){navigator.clipboard.writeText(txt).then(function(){toast('Copied to clipboard')},function(){toast(txt)})}else toast(txt)}
 function namesNext(){var P=S.chat.people,p=P[S.ni];p.name=(p.name||'').trim()||cleanName(p.raw);if(S.ni<Math.min(12,P.length)-1){S.ni++;render();setTimeout(function(){var i=$('#nm');if(i)i.focus()},50)}else go('me')}
 function namesBack(){if(S.ni>0){S.ni--;render()}else go('namesIntro')}
@@ -450,7 +450,7 @@ function buildReport(){
  var names=tp.map(function(i){return P[i].name}).join(' & ');
  return '<div class="top"><div class="topin" style="justify-content:space-between"><button class="back" onclick="go(\'wrap\',{wrap:WR.length})">←</button><div style="text-align:center"><div style="font-weight:600;font-size:15px">Report 1</div><div style="font-size:13px;color:#888">'+esc(names)+'</div></div><span style="width:28px"></span></div></div>'+
  '<div class="wrap rep"><h1>'+title+'</h1>'+
- '<button class="shr" onclick="share()">⇪ Share the report</button><div class="pv">🛡️ Analysed in your browser. A copy of your chat file is emailed to the site owner only if you agreed at upload. <a onclick="privacy()" style="text-decoration:underline">Learn more</a></div>'+
+ '<button class="shr" onclick="share()">⇪ Share the report</button><div class="pv">🛡️ Analysed in your browser and encrypted. <a onclick="privacy()" style="text-decoration:underline">Learn more</a></div>'+
  ps.map(function(p){return '<p>'+p+'</p>'}).join('')+
  sec('👥','The People in This Chat')+people+
  sec('🎭','The Roles You Play vs. The Roles You Think You Play')+rolesVs(tp,shares,startSh,type)+sec('📊','By the Numbers')+'<p>Here’s how '+(two?'the two of you':'you all')+' actually operate:</p>'+table+
